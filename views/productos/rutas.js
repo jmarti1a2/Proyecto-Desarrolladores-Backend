@@ -8,7 +8,8 @@ import {
 } from '../../controllers/productos/controller.js';
 
 
-//codigo back productos
+//codigo back productos para organizacion
+//codigo
 
 const rutasProducto = Express.Router()
 
@@ -39,17 +40,14 @@ rutasProducto.route('/productos/:id').get((req, res) => {
 });
 
 
-
-
 rutasProducto.route('/productos/:id').patch((req, res)=> {
     editarProducto(req.params.id, req.body, genericCallback(res))
 })
-
 
 
 rutasProducto.route('/productos/:id').delete((req, res) => {
     eliminarProducto(req.params.id, genericCallback(res))
 })
 
-export default rutasProducto
+export default rutasProducto   
 
