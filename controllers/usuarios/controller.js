@@ -3,7 +3,7 @@ import { getDB } from '../../db/db.js'
 
 const queryAllUsers = async (callback)=>{
     const conexion = getDB()
-    await conexion.collection('usuario').find().toArray(callback);
+    await conexion.collection('usuario').find({}).toArray(callback);
 }
 
 const crearUsuario = async (datosUsuario, callback) => {
@@ -20,7 +20,7 @@ const consultarUsuario = async (id, callback)=>{
 
 
 const editarUsuario = async (id, edicion, callback) => {
-    const filtroUsuario = { _id: new ObjectId(edicion.id) };
+    const filtroUsuario = { _id: new ObjectId(id) };
        const operacion = {
         $set: edicion,
     };

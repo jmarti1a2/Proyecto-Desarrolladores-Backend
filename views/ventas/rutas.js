@@ -32,7 +32,7 @@ rutasVenta.route('/ventas').post((req, res) => {
 });
 
 
-rutasVenta.route('/ventas/id:').get((req, res) => {
+rutasVenta.route('/ventas/:id').get((req, res) => {
     console.log('alguien hizo get en la ruta /ventas');
     consultarVenta(req.params.id, genericCallback(res))
 });
@@ -46,7 +46,7 @@ rutasVenta.route('/ventas/:id').patch((req, res)=> {
 
 
 rutasVenta.route('/ventas:id').delete((req, res) => {
-    eliminarVenta(req.params.id, genericCallback(req, res))
+    eliminarVenta(req.params.id, genericCallback(res))
 })
 
 export default rutasVenta

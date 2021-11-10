@@ -32,7 +32,7 @@ rutasUsuario.route('/usuarios').post((req, res) => {
 });
 
 
-rutasUsuario.route('/usuarios/id:').get((req, res) => {
+rutasUsuario.route('/usuarios/:id').get((req, res) => {
     console.log('alguien hizo get en la ruta /usuarios');
     consultarUsuario(req.params.id, genericCallback(res))
 });
@@ -46,7 +46,7 @@ rutasUsuario.route('/usuarios/:id').patch((req, res)=> {
 
 
 rutasUsuario.route('/usuarios:id').delete((req, res) => {
-    eliminarUsuario(req.params.id, genericCallback(req, res))
+    eliminarUsuario(req.params.id, genericCallback(res))
 })
 
 export default rutasUsuario

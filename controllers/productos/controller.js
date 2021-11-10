@@ -18,7 +18,6 @@ const crearProducto = async (datosProducto, callback) => {
     } else {
        return "error";
     }
-
 }
 
 const consultarProducto = async (id, callback)=>{
@@ -28,7 +27,7 @@ const consultarProducto = async (id, callback)=>{
 
 
 const editarProducto = async (id, edicion, callback) => {
-    const filtroProducto = { _id: new ObjectId(edicion.id) };
+    const filtroProducto = { _id: new ObjectId(id) };
        const operacion = {
         $set: edicion,
     };

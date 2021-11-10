@@ -14,7 +14,8 @@ const rutasProducto = Express.Router()
 
 const genericCallback = (res)=>(err, result)=>{
     if(err) {
-        res.status(500).send('error consultando productos');
+        console.log('error', err)
+        res.status(500).send('error consultando los productos')
     } else {
         res.json(result);
     }
@@ -32,7 +33,7 @@ rutasProducto.route('/productos').post((req, res) => {
 });
 
 
-rutasProducto.route('/productos/id:').get((req, res) => {
+rutasProducto.route('/productos/:id').get((req, res) => {
     console.log('alguien hizo get en la ruta /productos');
     consultarProducto(req.params.id, genericCallback(res))
 });
@@ -45,8 +46,9 @@ rutasProducto.route('/productos/:id').patch((req, res)=> {
 })
 
 
-rutasProducto.route('/productos:id').delete((req, res) => {
-    eliminarProducto(req.params.id, genericCallback(req, res))
+
+rutasProducto.route('/productos/:id').delete((req, res) => {
+    eliminarProducto(req.params.id, genericCallback(res))
 })
 
 export default rutasProducto
