@@ -9,7 +9,7 @@ import {
 
 
 //codigo back productos para organizacion
-//codigo
+
 
 const rutasProducto = Express.Router()
 
