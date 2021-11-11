@@ -3,20 +3,18 @@ import {
     queryAllProducts, 
     crearProducto, 
     editarProducto,
+    eliminarProducto, 
     consultarProducto, 
-    eliminarProducto 
 } from '../../controllers/productos/controller.js';
-
 
 //codigo back productos para organizacion
 
-
 const rutasProducto = Express.Router()
 
-const genericCallback = (res)=>(err, result)=>{
+const genercCallback = (res)=>(err, result)=>{
     if(err) {
-        console.log('error', err)
-        res.status(500).send('error consultando los productos')
+        console.log('error',err)
+        res.status(500).json({error:err})
     } else {
         res.json(result);
     }
@@ -25,28 +23,28 @@ const genericCallback = (res)=>(err, result)=>{
 
 rutasProducto.route('/productos').get((req, res) => {
     console.log('alguien hizo get en la ruta /productos');
-    queryAllProducts(genericCallback(res))
+    queryAllProducts(genercCallback(res))
 });
 
 
 rutasProducto.route('/productos').post((req, res) => {
-    crearProducto(req.body, genericCallback(res))
+    crearProducto(req.body, genercCallback(res))
 });
 
 
 rutasProducto.route('/productos/:id').get((req, res) => {
     console.log('alguien hizo get en la ruta /productos');
-    consultarProducto(req.params.id, genericCallback(res))
-});
+    consultarProducto(req.params.id, genercCallback(res));
+  });
 
 
 rutasProducto.route('/productos/:id').patch((req, res)=> {
-    editarProducto(req.params.id, req.body, genericCallback(res))
+    editarProducto(req.params.id, req.body, genercCallback(res))
 })
 
 
 rutasProducto.route('/productos/:id').delete((req, res) => {
-    eliminarProducto(req.params.id, genericCallback(res))
+    eliminarProducto(req.params.id, genercCallback(res))
 })
 
 export default rutasProducto   

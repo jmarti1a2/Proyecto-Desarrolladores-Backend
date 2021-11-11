@@ -2,20 +2,20 @@ import { ObjectId } from 'mongodb';
 import { getDB } from '../../db/db.js'
 
 const queryAllSales = async (callback)=>{
-    const conexion = getDB()
-    await conexion.collection('venta').find({}).toArray(callback);
+    const baseDeDatos = getDB()
+    await baseDeDatos.collection('venta').find({}).toArray(callback);
 }
 
 const crearVenta = async (datosVenta, callback) => {
    
-        const conexion = getDB()
+        const baseDeDatos = getDB()
         //implementar codigo para crear Venta en la base de datos
-        await conexion.collection('venta').insertOne(datosVenta, callback);
+        await baseDeDatos.collection('venta').insertOne(datosVenta, callback);
 }
 
 const consultarVenta = async (id, callback)=>{
-    const conexion = getDB()
-    await conexion.collection('venta').findOne({_id: new ObjectId(id)}, callback);
+    const baseDeDatos = getDB()
+    await baseDeDatos.collection('venta').findOne({_id: new ObjectId(id)}, callback);
 }
 
 
@@ -24,8 +24,8 @@ const editarVenta = async (id, edicion, callback) => {
        const operacion = {
         $set: edicion,
     };
-    const conexion = getDB()
-    await conexion
+    const baseDeDatos = getDB()
+    await baseDeDatos
         .collection('venta')
         .findOneAndUpdate(
             filtroVenta, 
@@ -36,8 +36,8 @@ const editarVenta = async (id, edicion, callback) => {
 
 const eliminarVenta = async (id, callback) => {
     const filtroVenta = { _id: new ObjectId(id)};
-    const conexion = getDB()
-    await conexion.collection('venta').deleteOne(filtroVenta,callback)
+    const baseDeDatos = getDB()
+    await baseDeDatos.collection('venta').deleteOne(filtroVenta,callback)
 }
 
 export {queryAllSales, crearVenta, consultarVenta, editarVenta, eliminarVenta}

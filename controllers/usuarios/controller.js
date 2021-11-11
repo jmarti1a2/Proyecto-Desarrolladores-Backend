@@ -2,20 +2,20 @@ import { ObjectId } from 'mongodb';
 import { getDB } from '../../db/db.js'
 
 const queryAllUsers = async (callback)=>{
-    const conexion = getDB()
-    await conexion.collection('usuario').find({}).toArray(callback);
+    const baseDeDatos = getDB()
+    await baseDeDatos.collection('usuario').find({}).toArray(callback);
 }
 
 const crearUsuario = async (datosUsuario, callback) => {
-        const conexion = getDB()
-        await conexion.collection('usuario').insertOne(datosUsuario, callback);
+        const baseDeDatos = getDB()
+        await baseDeDatos.collection('usuario').insertOne(datosUsuario, callback);
   
 
 }
 
 const consultarUsuario = async (id, callback)=>{
-    const conexion = getDB()
-    await conexion.collection('usuario').findOne({_id: new ObjectId(id)}, callback);
+    const baseDeDatos = getDB()
+    await baseDeDatos.collection('usuario').findOne({_id: new ObjectId(id)}, callback);
 }
 
 
@@ -24,8 +24,8 @@ const editarUsuario = async (id, edicion, callback) => {
        const operacion = {
         $set: edicion,
     };
-    const conexion = getDB()
-    await conexion
+    const baseDeDatos = getDB()
+    await baseDeDatos
         .collection('usuario')
         .findOneAndUpdate(
             filtroUsuario, 
@@ -36,8 +36,8 @@ const editarUsuario = async (id, edicion, callback) => {
 
 const eliminarUsuario = async (id, callback) => {
     const filtroUsuario = { _id: new ObjectId(id)};
-    const conexion = getDB()
-    await conexion.collection('usuario').deleteOne(filtroUsuario,callback)
+    const baseDeDatos = getDB()
+    await baseDeDatos.collection('usuario').deleteOne(filtroUsuario,callback)
 }
 
 export {queryAllUsers, crearUsuario, consultarUsuario, editarUsuario, eliminarUsuario}
