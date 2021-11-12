@@ -3,18 +3,19 @@ import {
     queryAllUsers, 
     crearUsuario, 
     editarUsuario,
-    consultarUsuario, 
-    eliminarUsuario 
+    eliminarUsuario, 
+    consultarUsuario,
+    consultarOCrearUsuario, 
 } from '../../controllers/usuarios/controller.js';
 
-
-//codigo back usuarios
+//codigo back usuarios para organizacion
 
 const rutasUsuario = Express.Router()
 
-const genericCallback = (res)=>(err, result)=>{
+const genercCallback = (res)=>(err, result)=>{
     if(err) {
-        res.status(500).send('error consultando Usuarios');
+        console.log('error',err)
+        res.json({error:err})
     } else {
         res.json(result);
     }
@@ -23,31 +24,35 @@ const genericCallback = (res)=>(err, result)=>{
 
 rutasUsuario.route('/usuarios').get((req, res) => {
     console.log('alguien hizo get en la ruta /usuarios');
-    queryAllUsers(genericCallback(res))
+    queryAllUsers(genercCallback(res))
 });
 
 
 rutasUsuario.route('/usuarios').post((req, res) => {
-    crearUsuario(req.body, genericCallback(res))
+    crearUsuario(req.body, genercCallback(res))
 });
+
+rutasUsuario.route('/usuarios/self').get((req, res) => {
+    console.log('alguien hizo get en la ruta /self');
+    consultarOCrearUsuario(req, genercCallback(res))
+    // consultarUsuario(, genercCallback(res));
+  });
 
 
 rutasUsuario.route('/usuarios/:id').get((req, res) => {
     console.log('alguien hizo get en la ruta /usuarios');
-    consultarUsuario(req.params.id, genericCallback(res))
-});
-
-
+    consultarUsuario(req.params.id, genercCallback(res));
+  });
 
 
 rutasUsuario.route('/usuarios/:id').patch((req, res)=> {
-    editarUsuario(req.params.id, req.body, genericCallback(res))
+    editarUsuario(req.params.id, req.body, genercCallback(res))
 })
 
 
-rutasUsuario.route('/usuarios:id').delete((req, res) => {
-    eliminarUsuario(req.params.id, genericCallback(res))
+rutasUsuario.route('/usuarios/:id').delete((req, res) => {
+    eliminarUsuario(req.params.id, genercCallback(res))
 })
 
-export default rutasUsuario
+export default rutasUsuario   
 
