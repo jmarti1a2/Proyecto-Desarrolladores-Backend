@@ -22,6 +22,7 @@ const consultarOCrearUsuario = async(req, callback)=> {
     const token = req.headers.authorization.split('Bearer ')[1]
     const user = jwt_decode(token)['http://localhost/userData']
     console.log(user)
+
     const baseDeDatos = getDB()
     await baseDeDatos.collection('usuario').findOne({ email: user.email }, async (err, response)=>{
         console.log('response consulta bd', response)
@@ -31,7 +32,8 @@ const consultarOCrearUsuario = async(req, callback)=> {
         } else {
             user.auth0ID= user._id
             delete user._id
-            user.rol='inactivo'
+            user.rol='sin rol'
+            user.estado='pendiente'
             await crearUsuario(user,(err, respuesta)=> callback(err, user))
         }
     })
