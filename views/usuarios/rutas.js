@@ -12,14 +12,13 @@ import {
 
 const rutasUsuario = Express.Router()
 
-const genercCallback = (res)=>(err, result)=>{
-    if(err) {
-        console.log('error',err)
-        res.json({error:err})
+const genercCallback = (res) => (err, result) => {
+    if (err) {
+      res.status(500).send('Error consultando los usuarios');
     } else {
-        res.json(result);
+      res.json(result);
     }
-}
+  };
 
 
 rutasUsuario.route('/usuarios').get((req, res) => {

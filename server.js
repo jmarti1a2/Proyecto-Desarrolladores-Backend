@@ -2,7 +2,6 @@ import Express from 'express';
 import Cors from 'cors';
 import dotenv from 'dotenv'
 import {conectarBD} from './db/db.js';
-import { MongoClient, ObjectId } from 'mongodb';
 import jwt from 'express-jwt'
 import jwks from 'jwks-rsa'
 import rutasProducto from './views/productos/rutas.js';
@@ -47,5 +46,7 @@ const main = () => {
         console.log(`escuchando puerto ${port}`);
         });
 };
+
+
 
 conectarBD(main)

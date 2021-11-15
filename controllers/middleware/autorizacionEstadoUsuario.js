@@ -14,17 +14,20 @@ const autorizacionEstadoUsuario = async(req,res,next)=>{
             console.log(response)
             if(response.estado==='rechazado'){
                 return res.sendStatus(401)
-                //res.end() //se agrega para correccion de bug no lo utilizo revisar si falla la creacion de usuarios
+                res.end() 
             }
             else{
                 console.log('habilitado')
+                next()
             }
+        }else {
+            next()
         }
     })
 
 
  console.log('hola mundo soy middleware')
- next()
+ 
 }
 
 export default autorizacionEstadoUsuario
