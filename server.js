@@ -10,7 +10,7 @@ import rutasVenta from './views/ventas/rutas.js'
 import autorizacionEstadoUsuario from './controllers/middleware/autorizacionEstadoUsuario.js';
 
 
-dotenv.config( { path:'./.env'})
+dotenv.config( { path:'./.env'})    
 
 const port = process.env.PORT || 5000
 
